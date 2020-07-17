@@ -7,13 +7,13 @@
    "/" /
    "*" *})
 
-(def operator? (set (keys operators)))
+(def operator? (comp boolean (set (keys operators))))
 
 (def numeric? (partial re-matches #"(\d*\.)?\d+"))
 
 (def parse-number read-string)
 
-(defn- invoke-operator
+(defn invoke-operator
   [operator [rh lh & rest]]
   (when-not (and rh lh)
     (throw (IllegalArgumentException. "Not enough juice in the stack")))
