@@ -1,4 +1,5 @@
-(ns frontwards-hsilop-notation.core)
+(ns frontwards-hsilop-notation.core
+  (:require [clojure.string :as str]))
 
 (def operators
   {"+" +
@@ -31,3 +32,7 @@
        :else             (throw
                           (IllegalArgumentException. (str "Unexpected token: " (prn-str token)))))
      stack)))
+
+(defn eval-string
+  [tokens-as-string]
+  (eval-rpn (str/split (str/trim tokens-as-string) #"\s+")))
